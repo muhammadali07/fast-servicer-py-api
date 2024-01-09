@@ -1,7 +1,7 @@
 from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
-from config import settings
+from .config import settings
 from sqlalchemy.orm import sessionmaker
 import warnings
 from sqlalchemy import exc as sa_exc

@@ -2,10 +2,10 @@ import secrets
 import os
 from typing import Dict, Any, Optional
 from dotenv import load_dotenv
-from pydantic import (
-    BaseSettings,
-    validator,
+from pydantic_settings import (
+    BaseSettings
 )
+from pydantic import validator
 
 # load .env from project
 load_dotenv()
@@ -18,7 +18,8 @@ class Settings(BaseSettings):
     PROXY_ROOT_PATH: str = os.getenv('PROXY_ROOT_PATH')
     SECRET_KEY: str = secrets.token_urlsafe(32)
     DEFAULT_PAGESIZE: int = 10
-    POSTGRES_DB_SERVER: str = os.getenv('POSTGRES_DB_SERVER')
+    # POSTGRES_DB_SERVER: str = os.getenv('POSTGRES_DB_SERVER')
+    POSTGRES_DB_SERVER: str = "localhost"
     POSTGRES_DB_API_USER: str = os.getenv('POSTGRES_DB_API_USER')
     POSTGRES_DB_API_PASSWORD: str = os.getenv('POSTGRES_DB_API_PASSWORD')
     POSTGRES_DB_API: str = os.getenv('POSTGRES_DB_API')
@@ -36,9 +37,13 @@ class Settings(BaseSettings):
         driver = "asyncpg"
         user = values.get("POSTGRES_DB_API_USER")
         password = values.get("POSTGRES_DB_API_PASSWORD")
-        host = values.get("POSTGRES_DB_SERVER")
+        host = "localhost"
         database = values.get("POSTGRES_DB_API")
-        return "{}+{}://{}:{}@{}/{}".format(scheme, driver, user, password, host, database)
+        port = values.get("POSTGRES_DB_EXPOSE_PORT")
+
+        connection =  "{}+{}://{}:{}@{}:{}/{}".format(scheme, driver, user, password, host,port, database)
+        print(connection)
+        return connection
 
     # --
 
