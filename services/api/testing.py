@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from app import testing_crud
 from utils import RespApp
-from schema import Account
+from schema import account
 
 
 router = APIRouter()
@@ -17,7 +17,7 @@ async def GreetingForAll(request: str):
     out_resp = await testing_crud.GreetingForAll(request)
     return RespApp(status="00", message="success", data=out_resp)
 
-@router.get("/login")
-async def Login(request: Account):
+@router.post("/login")
+async def Login(request: account):
     out_resp = await testing_crud.login(request)
     return RespApp(status="00", message="success", data=out_resp)

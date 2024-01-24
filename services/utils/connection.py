@@ -10,17 +10,22 @@ warnings.simplefilter("ignore", category=sa_exc.SAWarning)
 
 # creates an instance of AsyncEngine which then offers an async version
 engine = create_async_engine(
-    settings.SQLALCHEMY_WITH_DRIVER_URI,
+    url=settings.SQLALCHEMY_WITH_DRIVER_URI,
     echo=False, # set it to True if you wanna know what sqlalchemy did
     pool_size=100,
     max_overflow=200,
     pool_recycle=300,
     pool_pre_ping=True,
-    pool_use_lifo=True)
+    pool_use_lifo=True
+)
 
 # create AsyncSession sessionmaker version
 async_session = sessionmaker(
-    engine, expire_on_commit=False, class_=AsyncSession
+    bind=engine, 
+    expire_on_commit=False, 
+    class_=AsyncSession,
+    autocommit=False, 
+    autoflush=False
 )
 
 metadata = MetaData()
