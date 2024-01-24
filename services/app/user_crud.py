@@ -12,9 +12,11 @@ async def create_new_account(data: regisAccount):
         if data.role == "" :
             raise Exception("role harus di isi")
 
-        createAccount, e = user_datastore.registNewAccount(data)
+        resCreateAccount, e = user_datastore.registNewAccount(data)
         if e != None:
             raise Exception(f"{e}")
+        
+        return resCreateAccount, None
 
 
     except Exception as e:
