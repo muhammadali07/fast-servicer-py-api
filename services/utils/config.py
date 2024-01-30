@@ -20,9 +20,13 @@ class Settings(BaseSettings):
     DEFAULT_PAGESIZE: int = 10
     # POSTGRES_DB_SERVER: str = os.getenv('POSTGRES_DB_SERVER')
     POSTGRES_DB_SERVER: str = "localhost"
-    POSTGRES_DB_API_USER: str = os.getenv('POSTGRES_DB_API_USER')
-    POSTGRES_DB_API_PASSWORD: str = os.getenv('POSTGRES_DB_API_PASSWORD')
+
+    # POSTGRES_DB_API_USER: str = os.getenv('POSTGRES_DB_API_USER')
+    POSTGRES_DB_API_USER: str = "codingnow_user"
+    # POSTGRES_DB_API_PASSWORD: str = os.getenv('POSTGRES_DB_API_PASSWORD')
+    POSTGRES_DB_API_PASSWORD: str = "codingnow_pass"
     POSTGRES_DB_API: str = os.getenv('POSTGRES_DB_API')
+    POSTGRES_DB_API: str = "codingnow_dev"
     POSTGRES_DB_EXPOSE_PORT: str = os.getenv('POSTGRES_DB_EXPOSE_PORT')
 
     SQLALCHEMY_WITH_DRIVER_URI: Optional[str] = None
@@ -35,13 +39,16 @@ class Settings(BaseSettings):
         # dialect[+driver]://user:password@host/dbname[?key=value..]
         scheme = "postgresql"
         driver = "asyncpg"
-        user = values.get("POSTGRES_DB_API_USER")
-        password = values.get("POSTGRES_DB_API_PASSWORD")
+        # user = values.get("POSTGRES_DB_API_USER")
+        # password = values.get("POSTGRES_DB_API_PASSWORD")
+        user = "codingnow_user"
+        password = "codingnow_pass"
         host = "localhost"
-        database = values.get("POSTGRES_DB_API")
+        database = "codingnow_dev"
         port = values.get("POSTGRES_DB_EXPOSE_PORT")
 
         connection =  "{}+{}://{}:{}@{}:{}/{}".format(scheme, driver, user, password, host,port, database)
+        print(connection)
         return connection
 
     # --
