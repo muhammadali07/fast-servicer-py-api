@@ -8,4 +8,4 @@ class account(BaseModel):
 class regisAccount(BaseModel):
     email : str = "muhalibalhtiar@gmail.com"
     password : str = "1234zzxx"
-    role : str = "supervisor"
+    role : str = "spv"

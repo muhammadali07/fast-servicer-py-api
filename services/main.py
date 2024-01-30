@@ -19,8 +19,7 @@ async def startup():
         print("do migration data database ....")
         # await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
-
-        print("do migration database done !....")
+        print("do migration database done ....")
 
 app.add_event_handler("startup", startup)
 
