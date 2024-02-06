@@ -48,7 +48,6 @@ class Settings(BaseSettings):
         port = values.get("POSTGRES_DB_EXPOSE_PORT")
 
         connection =  "{}+{}://{}:{}@{}:{}/{}".format(scheme, driver, user, password, host,port, database)
-        print(connection)
         return connection
 
     # --

@@ -19,3 +19,16 @@ async def RegistNewAccount(
         return RespApp(status="02", message=f"{e}", data=None)
     
     return RespApp(status="00", message="success", data=out_resp)
+
+@router.get("/get-list-new-account")
+async def GetListNewAccount(
+    page: int = 0,
+    limit: int = 10,
+    keyword: str = None,
+    db: AsyncSession = Depends(get_async_session)
+    ):
+    out_resp, e = await user_crud.get_list_new_account(page, limit, keyword, db)
+    if e != None:
+        return RespApp(status="02", message=f"{e}", data=None)
+    
+    return RespApp(status="00", message="success", data=out_resp)
